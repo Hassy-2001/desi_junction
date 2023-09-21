@@ -1,0 +1,68 @@
+{% extends 'ABase.html' %}
+{% block content %}
+{% load cart %}
+{% load custom_filters %}
+
+<div class="container-fluid my-2">
+    <div class="border rounded p-4 m-4">
+        <p class="display-3"><b>Your Orders</b></p>
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Serial.No</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+
+
+            <tbody>
+            {% for order in orders %}
+
+            <tr>
+                <td scope="row">{{forloop.counter}}</td>
+                <td><img class="square" src="{{order.product.product_images.url}}" height="60px;" alt=""></td>
+                <td>{{order.product.product_name}}</td>
+                <td>{{order.date}}</td>
+                <td>{{order.price|Currency_sign}}</td>
+                <td>{{order.quantity}}</td>
+                <td>{{order.quantity|multiply:order.price|Currency_sign}}</td>
+
+                {% if order.status %}
+                <td><small class="badge bg-success">Completed</small></td>
+                {% else %}
+                <td><small class="badge bg-danger">Pending</small></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}
